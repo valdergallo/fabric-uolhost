@@ -1,6 +1,0 @@
-SetHandler python-program
-PythonHandler django.core.handlers.modpython
-SetEnv DJANGO_SETTINGS_MODULE {{project}}.src.settings
-PythonInterpreter {{project}}
-PythonOption django.root /{{project}}
-PythonPath "[{{python_path}}] + sys.path"
