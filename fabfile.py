@@ -4,6 +4,7 @@
 import os
 import config
 from fabric.api import *
+from fabric.colors import red, green, yellow
 from fabric.contrib.console import confirm
 from settings import *
 
@@ -18,11 +19,11 @@ def test():
     run('python -V')
 
 
-def _save_config(project_path):
+def _save_config(project, project_path):
     "Private create config.yaml file"
 
     yc.set(host=env.host)
-    yc.set(project=env.project)
+    yc.set(project=project)
     yc.set(path=project_path)
     yc.set(python_path=env.python_path)
     yc.save()
@@ -32,7 +33,8 @@ def pip(egg):
     "Install eggs"
     config = yc.get()
     python_path = config['python_path']
-    local('easy_install -Zmaxd %s %s' % (python_path, egg))
+    run("mkdir -p %s" % python_path)
+    run('easy_install -Z -m -a -x -d %s %s' % (python_path, egg))
 
 
 def requeriments(textfile):
@@ -44,7 +46,7 @@ def requeriments(textfile):
     fileopen.close()
 
 
-def get_list_dir():
+def _get_list_dir():
     "Get path from eggs"
 
     dirs = []
@@ -74,8 +76,11 @@ PythonPath "{1} + sys.path"
     print "Created .htaccess file"
 
 
-def build(project='django', project_path=env.path):
+def build():
     "Build packages in server"
 
-    _save_config(project_path)
-    print('ok')
+    print(yellow('save config'))
+    _save_config(env.project, env.python_path)
+
+    print(yellow('Install eggs'))
+    requeriments('requeriments.txt')
