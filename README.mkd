@@ -40,3 +40,4 @@ Adicionar no settings.py
 > env.user = 'seu_usuario'
 > env.path = '~/public_html/' #destino do projeto
 > env.python_path = '~/eggs' #destino dos eggs
+--------------------------------------------------------
