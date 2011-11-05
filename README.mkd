@@ -35,8 +35,8 @@ EXEMPLO
 
 ## Adicionar no settings.py
 
- from fabric.api import env
- env.hosts = ['seusite.com.br']
- env.user = 'seu_usuario'
- env.path = '~/public_html/' #destino do projeto
- env.python_path = '~/eggs' #destino dos eggs
+from fabric.api import env
+env.hosts = ['seusite.com.br']
+env.user = 'seu_usuario'
+env.path = '~/public_html/' #destino do projeto
+env.python_path = '~/eggs' #destino dos eggs
