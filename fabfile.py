@@ -38,7 +38,7 @@ def requeriments(textfile):
     "Install multiples eggs"
 
     fileopen = open(textfile)
-    for line in fileopen.readline():
+    for line in fileopen.readlines():
         pip(line)
     fileopen.close()
 
