@@ -45,6 +45,8 @@ def requeriments(textfile):
 
 
 def get_list_dir():
+    "Get path from eggs"
+
     dirs = []
     dirList = os.listdir(env.python_path)
     for dir in dirList:
