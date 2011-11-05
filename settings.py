@@ -5,6 +5,7 @@ import os
 
 BASEDIR = os.path.dirname(__file__)
 
+env.project = 'teste'
 env.hosts = ['valdergallo.com.br']
 env.user = 'valdergall'
 env.path = '~/public_html/teste/'
