@@ -1,4 +1,26 @@
-Underscores
+Fabric UOLHost
 ==========================================================
 
 - Projeto para automatizar instancias de django na UOLHOST
+
+COMANDOS
+---------------------------------------------------------
+
+- test
+    - Testa as configurações e conexão
+
+- build 
+    - Cria o arquivo de configuração
+
+- pip
+    - Instala pacote
+
+- requeriments
+    - Instala lista de pacotes salvo em arquivo requeriments.txt
+    A idéia é copia a pip -r requeriments.txt
+    o comando interpreta cada linha do arquivo e instala o
+    pacote descrito.
+
+    Para criar o arquivo deve ser utilizado: 
+        - pip freeze > requeriments.txt
+

@@ -34,6 +34,15 @@ def pip(egg):
     local('easy_install -Zmaxd %s %s' % (python_path, egg))
 
 
+def requeriments(textfile):
+    "Install multiples eggs"
+
+    fileopen = open(textfile)
+    for line in fileopen.readline():
+        pip(line)
+    fileopen.close()
+
+
 def build(project_path=env.path):
     "Build packages in server"
 
