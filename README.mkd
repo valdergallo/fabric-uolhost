@@ -36,6 +36,7 @@ EXEMPLO
 ## Adicionar no settings.py
 
     from fabric.api import env
+    env.project = 'seusite'
     env.hosts = ['seusite.com.br']
     env.user = 'seu_usuario'
     env.path = '~/public_html/' #destino do projeto
@@ -44,7 +45,6 @@ EXEMPLO
 REQUERIMENTOS
 -----------------------------------------------------------
     Fabric==1.3.1
-    PyYAML==3.10
     distribute==0.6.19
     pycrypto==2.3
     ssh==1.7.8
