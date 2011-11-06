@@ -10,7 +10,7 @@ COMANDOS
     - Testa as configurações e conexão
 
 - build 
-    - Cria o arquivo de configuração
+    - Cria instancia 
 
 - pip
     - Instala pacote
