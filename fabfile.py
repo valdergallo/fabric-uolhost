@@ -2,14 +2,14 @@
 # encoding: utf-8
 
 import os
-import config
 from fabric.api import *
 from fabric.colors import red, green, yellow
 from fabric.contrib.console import confirm
 from settings import *
+from fabric.state import output
 
-yc = config.yConfig()
-
+output['status'] = False
+output['running'] = False
 
 def test():
     "Test connection with server"
@@ -18,23 +18,10 @@ def test():
     run('uname -a')
     run('python -V')
 
-
-def _save_config(project, project_path):
-    "Private create config.yaml file"
-
-    yc.set(host=env.host)
-    yc.set(project=project)
-    yc.set(path=project_path)
-    yc.set(python_path=env.python_path)
-    yc.save()
-
-
 def pip(egg):
     "Install eggs"
-    config = yc.get()
-    python_path = config['python_path']
-    run("mkdir -p %s" % python_path)
-    run('easy_install -Z -m -a -x -d %s %s' % (python_path, egg))
+    output = run("mkdir -p %s" % env.python_path, pty=False)
+    output = run('easy_install -Zmaxd %s %s' % (env.python_path, egg), pty=False)
 
 
 def requeriments(textfile):
@@ -50,15 +37,16 @@ def _get_list_dir():
     "Get path from eggs"
 
     dirs = []
-    dirList = os.listdir(env.python_path)
-    for dir in dirList:
-        dirs.append(os.path.join(env.python_path, dir))
+    dirList = run('ls %s' % env.python_path)
+    for dir in dirList.split('  '):
+        dirs.append(env.python_path+dir)
+    dirs.append(env.path)
     return dirs
 
 
 def create_htaccess():
     "Create .htaccess"
-    dirList = get_list_dir()
+    dirList = _get_list_dir()
 
     htaccess = """
 SetHandler python-program
@@ -79,8 +67,10 @@ PythonPath "{1} + sys.path"
 def build():
     "Build packages in server"
 
-    print(yellow('save config'))
-    _save_config(env.project, env.python_path)
-
     print(yellow('Install eggs'))
     requeriments('requeriments.txt')
+
+    print(yellow('Create config'))
+    create_htaccess()
+
+
