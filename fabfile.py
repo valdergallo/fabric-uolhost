@@ -52,6 +52,7 @@ def _get_list_dir():
 def create_htaccess():
     "Create .htaccess"
     dirList = _get_list_dir()
+    project = os.path.basename(os.getcwd())
 
     htaccess = """SetHandler python-program
 PythonHandler django.core.handlers.modpython
@@ -59,7 +60,7 @@ SetEnv DJANGO_SETTINGS_MODULE {0}.src.settings
 PythonInterpreter {0}
 PythonOption django.root /{0}
 PythonPath "{1} + sys.path"
-""".format(env.project, dirList)
+""".format(project, dirList)
 
     name = '.htaccess'
     file_open = open(name, 'w')
