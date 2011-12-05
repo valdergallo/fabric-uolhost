@@ -38,28 +38,32 @@ def requeriments(textfile):
     fileopen.close()
 
 
-def _get_list_dir():
+def _get_listdir():
     "Get path from eggs"
 
     dirs = []
-    dirList = run('ls %s' % env.python_path)
-    for dir in dirList.split('  '):
-        dirs.append(env.python_path + dir)
+    with cd(env.python_path):
+        run('ls > ~/tmp/listdir.txt')
+        get("~/tmp/listdir.txt", local_path='.')
+        dirList = open('./listdir.txt', 'r')
+    for di in dirList.readlines():
+        dirs.append(str(env.python_path) + str(di).replace('\n', ''))
     dirs.append(env.path)
+    os.remove('./listdir.txt')
     return dirs
 
 
 def create_htaccess():
     "Create .htaccess"
-    dirList = _get_list_dir()
-    project = os.path.basename(os.getcwd())
+    dirList = _get_listdir()
+    project = os.path.basename(os.path.realpath("../"))
 
     htaccess = """SetHandler python-program
 PythonHandler django.core.handlers.modpython
-SetEnv DJANGO_SETTINGS_MODULE {0}.src.settings
+SetEnv DJANGO_SETTINGS_MODULE {0}.settings
 PythonInterpreter {0}
 PythonOption django.root /{0}
-PythonPath "{1} + sys.path"
+PythonPath "{1}" + sys.path
 """.format(project, dirList)
 
     name = '.htaccess'
@@ -72,7 +76,7 @@ PythonPath "{1} + sys.path"
 
 
 def upload():
-    project = os.path.dirname(__file__)
+    project = os.path.realpath('..')
     remote = env.path
     run('mkdir -p %s' % remote)
 
