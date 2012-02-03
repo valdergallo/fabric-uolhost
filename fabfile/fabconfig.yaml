@@ -1,0 +1,10 @@
+default:
+    user: root
+    django_project_name: seusite
+    hosts:
+        - seusite.com.br
+    path: ~/public_html/
+    python_path: ~/eggs
+    database_name: askthepony
+    database_user: askthepony
+    database_password: askthepony

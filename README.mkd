@@ -28,19 +28,20 @@ EXEMPLO
 ---------------------------------------------------------
 
 - Criar instancia
-    1. Configurar o system.py para adicionar as informações do env
-    2. Criar arquivo com requeriments.txt
+    1. Configurar o fabconfig.py para adicionar as informações do servidor
+    2. Criar arquivo com requeriments.txt (pip freeze)
     3. fab build
     
 
-## Adicionar no settings.py
+## Adicionar no fabconfig.py
 
-    from fabric.api import env
+     
     env.project = 'seusite'
     env.hosts = ['seusite.com.br']
     env.user = 'seu_usuario'
     env.path = '~/public_html/' #destino do projeto
     env.python_path = '~/eggs' #destino dos eggs
+
 
 REQUERIMENTOS
 -----------------------------------------------------------
