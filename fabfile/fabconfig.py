@@ -4,6 +4,7 @@ from fabric.api import env
 
 # globals
 env.hosts = ['valdergallo.com.br']
+env.project_name = 'fabric-uolhost'
 env.user = 'valdergall'
 env.path = '~/public_html/teste/'
 env.python_path = '~/eggs/'
