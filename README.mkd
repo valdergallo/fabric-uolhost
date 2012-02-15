@@ -1,36 +1,36 @@
 Fabric UOLHost
 ==========================================================
 
-- Projeto para automatizar instancias de django na UOLHOST
+	Projeto para automatizar instancias de django na UOLHOST
 
 COMANDOS
 ---------------------------------------------------------
 
-- test
-    - Testa as configurações e conexão
+	test
+    	Testa as configurações e conexão
 
-- build 
-    - Cria instancia 
+	build
+    	Cria instancia 
 
-- pip
-    - Instala pacote
+	pip
+    	Instala pacote
 
-- requeriments
-    - Instala lista de pacotes salvo em arquivo requeriments.txt
+	requeriments
+    	Instala lista de pacotes salvo em arquivo requeriments.txt
     A idéia é copia a pip -r requeriments.txt
     o comando interpreta cada linha do arquivo e instala o
     pacote descrito.
 
     Para criar o arquivo deve ser utilizado: 
-        - pip freeze > requeriments.txt
+    	pip freeze > requeriments.txt
 
 EXEMPLO
 ---------------------------------------------------------
 
-- Criar instancia
-    1. Configurar o fabconfig.py para adicionar as informações do servidor
-    2. Criar arquivo com requeriments.txt (pip freeze)
-    3. fab build
+	Criar instancia
+    	1. Configurar o fabconfig.py para adicionar as informações do servidor
+    	2. Criar arquivo com requeriments.txt (pip freeze)
+    	3. fab build
     
 
 ## Adicionar no fabconfig.py
@@ -50,3 +50,11 @@ REQUERIMENTOS
     pycrypto==2.3
     ssh==1.7.8
     wsgiref==0.1.2
+
+
+DIRETÓRIOS DO PROJETO
+-----------------------------------------------------------
+	projeto 
+		deploy (fabric-uol repository)
+		app
+		templates
