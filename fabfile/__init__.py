@@ -31,6 +31,7 @@ def pip(egg):
     output = run('easy_install -Zmaxd %s %s' %
             (env.python_path, egg), pty=False)
 
+
 @task
 def requeriments(textfile):
     "Install multiples eggs"
@@ -40,8 +41,8 @@ def requeriments(textfile):
         pip(line)
     fileopen.close()
 
+
 @task
-@with_settings(warn_only=True)
 def get_list_dir():
     "Get path from eggs"
     dirs = []
@@ -61,10 +62,8 @@ def create_htaccess():
     "Create .htaccess"
     python_path = get_list_dir()
     project = os.path.basename(os.getcwd())
-    htaccess = open('./conf/htaccess.conf').read() % { 
-                                                        'project': project, 
-                                                        'python_path': python_path 
-                                                        }
+    htaccess = open('./conf/htaccess.conf').read() % \
+        { 'project': project, 'python_path': python_path }
   
     name = '.htaccess'
     file_open = open(name, 'w')
@@ -73,7 +72,19 @@ def create_htaccess():
     run('mkdir -p %s' % env.path)
     put(os.path.realpath(name), env.path)
     print "Created .htaccess file"
+    
 
+def update_bashrc():
+    "Update .bashrc"
+    get('~/.bashrc', './')
+    project = os.path.basename(os.getcwd())
+    bashrc = open('./conf/bash.conf').read() % { 'python_path': python_path }
+    with open(".bashrc", "a") as f:
+        check_content = f.read()
+        if bashrc not in check_content:
+            f.write(bashrc)
+            f.close()
+            put(".bashrc", "~/")
 
 @task
 def upload():
@@ -81,20 +92,26 @@ def upload():
     project = os.path.dirname(__file__)
     remote = env.path
     run('mkdir -p %s' % remote)
+    
+    with cd(remote):
+        upload_project(project, remote)
 
-    upload_project(project, remote)
+
+def create_config():
+    "Create htaccess and bashrc"
+    create_htaccess()
+    update_bashrc()
 
 
 @task
+@with_settings(warn_only=True)
 def build():
     "Build packages in server"
-
     print(yellow('Install eggs'))
     requeriments('requeriments.txt')
 
     print(yellow('Create config'))
-    create_htaccess()
+    create_config()
 
     print(yellow('Send files'))
     upload()
-
