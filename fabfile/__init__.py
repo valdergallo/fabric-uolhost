@@ -42,7 +42,6 @@ def requeriments(textfile):
     fileopen.close()
 
 
-@task
 def get_list_dir():
     "Get path from eggs"
     dirs = []
@@ -58,7 +57,7 @@ def get_list_dir():
     return dirs
 
 
-def create_htaccess():
+def config_htaccess():
     "Create .htaccess"
     python_path = get_list_dir()
     project = os.path.basename(os.getcwd())
@@ -74,7 +73,7 @@ def create_htaccess():
     print "Created .htaccess file"
     
 
-def update_bashrc():
+def config_bashrc():
     "Update .bashrc"
     get('~/.bashrc', './')
     project = os.path.basename(os.getcwd())
@@ -99,8 +98,8 @@ def upload():
 
 def create_config():
     "Create htaccess and bashrc"
-    create_htaccess()
-    update_bashrc()
+    config_htaccess()
+    config_bashrc()
 
 
 @task

@@ -15,6 +15,9 @@ COMANDOS
 ####pip
     Instala pacote
 
+####upload
+    Envia o projeto para o servidor
+
 ###requeriments
     Instala lista de pacotes salvo em arquivo requeriments.txt
     A idéia é copia a pip -r requeriments.txt
