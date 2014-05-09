@@ -5,10 +5,11 @@ Projeto Morto
 -------------
 A UOLHost chegou em um tempo a me dar vantagens e me pagar
 para o desenvolvimento de automações para Django. 
-Porém, como isso acabou em 2007 eu parei de evoluir
+Porém, como isso acabou em 2010 eu parei de evoluir
 qualquer coisa sobre o assunto. 
 
 Esse projeto ficou no github, apenas como exemplo. 
+
 **Não deve ser utilizado em produção.**
 
 
