@@ -12,10 +12,11 @@ Esse projeto ficou no github, apenas como exemplo.
 **Não deve ser utilizado em produção.**
 
 
-* Projeto para automatizar instancias de django na UOLHOST
 
 COMANDOS
 ---------------------------------------------------------
+Projeto para automatizar instancias de django na UOLHOST
+
 
 ####test
 	Testa as configurações e conexão
